@@ -22,5 +22,6 @@ public class UI {
         VitalSigns bpAndSpO2 = new VitalSigns(125, 79, 97.2); // BP + SpO2
         System.out.println("BP: " + bpAndSpO2.getSys() + "/" + bpAndSpO2.getDias() + ", SpO2: " + bpAndSpO2.getSpO2());
         System.out.println("Timestamp: " + bpAndSpO2.getFormattedTime());
+        lj  hqwiuheaklr
     }
 }
