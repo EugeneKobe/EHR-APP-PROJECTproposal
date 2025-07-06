@@ -1,27 +1,45 @@
+import java.io.IOException;
+import java.time.LocalDate;
+
 public class UI {
     public static void main(String[] args) {
-        VitalSigns bpOnly = new VitalSigns(120, 80); // BP only
-        System.out.println("BP: " + bpOnly.getSys() + "/" + bpOnly.getDias());
-        System.out.println("Timestamp: " + bpOnly.getFormattedTime());
+        Ward ward = new Ward();
 
-        System.out.println();
+        // Create patient and admit
+        Patient p1 = new Patient(1, "Alice", LocalDate.of(1980, 3, 15), "Flu", "None");
+        p1.addVitalSign(new VitalSigns(37.2, 72, 120, 80, 98.0));
+        ward.admitPatient(p1);
 
-        VitalSigns tempAndBP = new VitalSigns(36.8, 115, 75); // Temp + BP
-        System.out.println("Temp: " + tempAndBP.getTemp());
-        System.out.println("BP: " + tempAndBP.getSys() + "/" + tempAndBP.getDias());
-        System.out.println("Timestamp: " + tempAndBP.getFormattedTime());
+        Patient p2 = new Patient(2, "Bob", LocalDate.of(1975, 7, 22));
+        p2.addVitalSign(new VitalSigns(36.5, 70, 118, 78, 99.0));
+        ward.admitPatient(p2);
 
-        System.out.println();
+        String filename = "patients.fasta";
 
-        VitalSigns hrBp = new VitalSigns(72, 130, 85, true); // HR + BP
-        System.out.println("HR: " + hrBp.getHR() + ", BP: " + hrBp.getSys() + "/" + hrBp.getDias());
-        System.out.println("Timestamp: " + hrBp.getFormattedTime());
+        try {
+            ward.saveToFile(filename);
+            System.out.println("Ward patients saved.");
+        } catch (IOException e) {
+            System.err.println("Failed to save: " + e.getMessage());
+        }
 
-        System.out.println();
+        // Clear ward, then reload patients from file
+        ward.clearWard();
+        try {
+            ward.loadFromFile(filename);
+            System.out.println("Ward patients loaded.");
+        } catch (IOException e) {
+            System.err.println("Failed to load: " + e.getMessage());
+        }
 
-        VitalSigns bpAndSpO2 = new VitalSigns(125, 79, 97.2); // BP + SpO2
-        System.out.println("BP: " + bpAndSpO2.getSys() + "/" + bpAndSpO2.getDias() + ", SpO2: " + bpAndSpO2.getSpO2());
-        System.out.println("Timestamp: " + bpAndSpO2.getFormattedTime());
-        lj  hqwiuheaklr
+        // Print ward patients
+        System.out.println(ward);
+
+        for (Patient p : ward.getPatients()) {
+            System.out.println(p);
+            for (VitalSigns vs : p.getVitalSigns()) {
+                System.out.println("  " + vs.serialize());
+            }
+        }
     }
 }
