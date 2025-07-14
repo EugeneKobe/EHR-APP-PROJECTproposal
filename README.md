@@ -8,28 +8,28 @@ A basic Electronic Health Record (EHR) system designed for a ward-based hospital
 
 ## 📌 Core Features
 
-- **Patient Management**: Admit, discharge, and track patients.
+- **core.Patient Management**: Admit, discharge, and track patients.
 - **Vital Sign Monitoring**: Record and timestamp key health metrics.
-- **Doctor Assignment**: Doctors can be linked to multiple patients.
-- **Ward Overview**: Maintain a list of currently admitted patients.
+- **core.Doctor Assignment**: Doctors can be linked to multiple patients.
+- **core.Ward Overview**: Maintain a list of currently admitted patients.
 
 ---
 
 ## 🧱 Class Overview
 
-### `Ward`
+### `core.Ward`
 - Manages a list of **patient IDs**.
 - Represents a hospital ward.
 
-### `Patient`
+### `core.Patient`
 - Stores personal details, **vital signs**, and **admission status**.
-- Linked to a **Doctor**.
+- Linked to a **core.Doctor**.
 
-### `Doctor`
-- Manages assigned **Patient** IDs.
+### `core.Doctor`
+- Manages assigned **core.Patient** IDs.
 - Stores login **credentials**.
 
-### `VitalSigns`
+### `core.VitalSigns`
 - Records individual measurements:
   - Temperature
   - Blood pressure
@@ -40,10 +40,10 @@ A basic Electronic Health Record (EHR) system designed for a ward-based hospital
 
 ## 🔁 Class Interactions
 
-- `Ward` contains multiple `Patient` IDs.
-- `Patient` objects are assigned to a `Doctor`.
-- `Patient` holds a list of `VitalSigns`.
-- `Doctor` manages multiple patients.
+- `core.Ward` contains multiple `core.Patient` IDs.
+- `core.Patient` objects are assigned to a `core.Doctor`.
+- `core.Patient` holds a list of `core.VitalSigns`.
+- `core.Doctor` manages multiple patients.
 
 ---
 
@@ -76,7 +76,7 @@ An optional challenge involves visualizing a patient's vital sign history as a *
 ## 🛠️ Getting Started
 
 1. **Create Classes**:
-   - `Patient`, `Doctor`, `Ward`, `VitalSigns`
+   - `core.Patient`, `core.Doctor`, `core.Ward`, `core.VitalSigns`
 
 2. **Develop GUI** (e.g., `AppView`):
    - Buttons for admit/discharge
@@ -91,7 +91,7 @@ An optional challenge involves visualizing a patient's vital sign history as a *
 
 ## ✅ Best Practices
 
-- Follow **MVC (Model-View-Controller)** pattern: Keep logic and UI separate.
+- Follow **MVC (Model-View-controller)** pattern: Keep logic and UI separate.
 - Use **System time** for logging and timestamps.
 - Validate user input at every step.
 
